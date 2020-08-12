@@ -166,6 +166,7 @@
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Swarmer.cpp" />
+    <ClCompile Include="WanderStateBehav.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Spawner.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Swarmer.h" />
+    <ClInclude Include="WanderStateBehav.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

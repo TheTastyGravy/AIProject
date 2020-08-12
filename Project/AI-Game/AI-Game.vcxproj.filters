@@ -57,6 +57,9 @@
     <ClCompile Include="StateMachine.cpp">
       <Filter>Source Files\Behaviours/States</Filter>
     </ClCompile>
+    <ClCompile Include="WanderStateBehav.cpp">
+      <Filter>Source Files\Behaviours/States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -96,6 +99,9 @@
       <Filter>Header Files\Behaviours/States</Filter>
     </ClInclude>
     <ClInclude Include="StateMachine.h">
+      <Filter>Header Files\Behaviours/States</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderStateBehav.h">
       <Filter>Header Files\Behaviours/States</Filter>
     </ClInclude>
   </ItemGroup>
