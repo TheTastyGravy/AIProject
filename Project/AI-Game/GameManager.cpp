@@ -1,10 +1,16 @@
 #include "GameManager.h"
 
 std::vector<GameObject*> GameManager::pool;
+std::vector<GameObject*> GameManager::leaders;
+Graph2D GameManager::graph;
 
 
 std::vector<GameObject*> GameManager::searchForTag(Tag tag)
 {
+	// Return the leader vector if applicable
+	if (tag == Tag::Leader)
+		return leaders;
+
 	std::vector<GameObject*> result;
 
 	// Go trough each object in the pool
@@ -56,13 +62,6 @@ std::vector<GameObject*> GameManager::searchInRadius(Tag tag, float radius, Vect
 }
 
 
-std::vector<GameObject*> GameManager::getLeaders()
-{
-	// Temporary solution so this function can be called by swarmers
-	return searchForTag(Tag::Leader);
-}
-
-
 void GameManager::addToPool(GameObject* obj)
 {
 	// Check that obj isnt already in the pool
@@ -77,6 +76,30 @@ void GameManager::addToPool(GameObject* obj)
 
 void GameManager::removeFromPool(GameObject* obj)
 {
+	bool isLeader = false;
+
+	// Check if the object is a leader
+	for (auto itter : obj->tags)
+	{
+		if (itter == Tag::Leader)
+		{
+			isLeader = true;
+			break;
+		}
+	}
+	if (isLeader)
+	{
+		// Remove the object from the leader vector
+		for (int i = 0; i < leaders.size(); i++)
+		{
+			if (leaders[i] == obj)
+			{
+				leaders.erase(leaders.begin() + i);
+				break;
+			}
+		}
+	}
+
 	// Find the object and remove it
 	for (int i = 0; i < pool.size(); i++)
 	{
@@ -86,4 +109,40 @@ void GameManager::removeFromPool(GameObject* obj)
 			return;
 		}
 	}
+}
+
+
+void GameManager::updateLeader(GameObject* obj, bool adding)
+{
+	// If it needs to be added, add it and exit
+	if (adding)
+	{
+		leaders.push_back(obj);
+		return;
+	}
+
+	// Otherwise, find and remove it
+	for (int i = 0; i < leaders.size(); i++)
+	{
+		if (leaders[i] == obj)
+		{
+			leaders.erase(leaders.begin() + i);
+			return;
+		}
+	}
+}
+
+
+std::vector<Graph2D::Node*> GameManager::findPath(Vector2 start, Vector2 end)
+{
+	//TODO: add pathfinding stuff
+
+	return std::vector<Graph2D::Node*>();
+}
+
+bool GameManager::loadGraph()
+{
+	//TODO: load graph
+
+	return false;
 }

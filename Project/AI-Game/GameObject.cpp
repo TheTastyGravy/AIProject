@@ -28,6 +28,10 @@ void GameObject::addTag(Tag tag)
 
 	// The tag isnt already assigned, so add it
 	tags.push_back(tag);
+
+	// If this is a leader, update its pools
+	if (tag == Tag::Leader)
+		GameManager::updateLeader(this, true);
 }
 
 void GameObject::removeTag(Tag tag)
@@ -38,4 +42,8 @@ void GameObject::removeTag(Tag tag)
 		if (tags[i] == tag)
 			tags.erase(tags.begin() + i);
 	}
+
+	// If this is a leader, update its pools
+	if (tag == Tag::Leader)
+		GameManager::updateLeader(this, false);
 }
