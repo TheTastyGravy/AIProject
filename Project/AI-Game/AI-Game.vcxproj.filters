@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Game objects">
       <UniqueIdentifier>{bc986756-6a68-4059-b1a0-d0c9c3336004}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Behaviours/States">
+      <UniqueIdentifier>{ba9ad218-a1dd-4b7d-a627-4292023635ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Behaviours/States">
+      <UniqueIdentifier>{0b5055c6-9e7e-44fb-b5d5-c57bfa301235}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -48,15 +54,15 @@
     <ClCompile Include="Swarmer.cpp">
       <Filter>Source Files\Game objects</Filter>
     </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Source Files\Behaviours/States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Behaviour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graph2D.h">
@@ -79,6 +85,18 @@
     </ClInclude>
     <ClInclude Include="Swarmer.h">
       <Filter>Header Files\Game objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour.h">
+      <Filter>Header Files\Behaviours/States</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\Behaviours/States</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
+      <Filter>Header Files\Behaviours/States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Header Files\Behaviours/States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

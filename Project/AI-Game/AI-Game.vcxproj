@@ -164,6 +164,7 @@
     <ClCompile Include="Leader.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Spawner.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Swarmer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,8 +175,11 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graph2D.h" />
     <ClInclude Include="GraphClass.h" />
+    <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="Transition.h" />
     <ClInclude Include="Leader.h" />
     <ClInclude Include="Spawner.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="Swarmer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
