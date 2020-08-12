@@ -7,7 +7,9 @@
 enum class Tag
 {
 	Swarmer,
-	Leader
+	Leader,
+	Spawner,
+	Player
 };
 
 

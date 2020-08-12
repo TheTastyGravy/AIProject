@@ -161,7 +161,10 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Graph2D.cpp" />
+    <ClCompile Include="Leader.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Spawner.cpp" />
+    <ClCompile Include="Swarmer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
@@ -171,6 +174,9 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graph2D.h" />
     <ClInclude Include="GraphClass.h" />
+    <ClInclude Include="Leader.h" />
+    <ClInclude Include="Spawner.h" />
+    <ClInclude Include="Swarmer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

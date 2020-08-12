@@ -1,0 +1,55 @@
+#include "Spawner.h"
+#include "Swarmer.h"
+#include "raylib.h"
+
+Vector2 randPos(int posRange, Vector2 indent);
+
+
+Spawner::Spawner(Vector2 position, std::shared_ptr<Behaviour> flockingState, float timeDelay, float radius) :
+	GameObject(position),
+	timePassed(0.0f),
+	timeDelay(timeDelay),
+	radius(radius),
+	wander(),
+	flocking(flockingState)
+{
+	addTag(Tag::Spawner);
+
+	//TODO: create wander state
+}
+
+Spawner::~Spawner()
+{
+}
+
+
+void Spawner::update(float deltaTime)
+{
+	timePassed += deltaTime;
+
+	// If enough time has passed, crate a swarmer and reset the timer
+	if (timePassed >= timeDelay)
+	{
+		// Find a radom position around the spawner
+		Vector2 pos = randPos(radius*2, Vector2SubtractValue(position, radius));
+		// Create a new agent at that position
+		Agent* swarmer = new Swarmer(pos, flocking, 5);
+		// Set the active state as wander
+		swarmer->addBehaviour(wander);
+
+		// Reset timer
+		timePassed = 0.0f;
+	}
+}
+
+void Spawner::draw()
+{
+	// Draw spawners as red pentagons
+	DrawPoly(position, 5, radius * 0.4f, 0.0f, RED);
+}
+
+
+Vector2 randPos(int posRange, Vector2 indent)
+{
+	return { (float)(rand() % posRange + indent.x), (float)(rand() % posRange + indent.y) };
+}
