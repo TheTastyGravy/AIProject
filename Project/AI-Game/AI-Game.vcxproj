@@ -160,6 +160,7 @@
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Graph2D.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,8 @@
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Graph2D.h" />
+    <ClInclude Include="GraphClass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

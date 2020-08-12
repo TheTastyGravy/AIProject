@@ -30,6 +30,9 @@
     <ClCompile Include="Agent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Graph2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -45,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Behaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
