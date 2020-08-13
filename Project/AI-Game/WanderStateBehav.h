@@ -6,7 +6,7 @@ class WanderStateBehav :
 	public Behaviour
 {
 public:
-	WanderStateBehav(Vector2 wanderCenter, float wanderRadius, float multi = 1.0f);
+	WanderStateBehav(Vector2 wanderCenter, int wanderRadius, float transitionDistance = 100.0f, float multi = 1.0f);
 	virtual ~WanderStateBehav();
 
 
@@ -15,9 +15,11 @@ public:
 
 protected:
 	Vector2 wandCenter;
-	float radius;
+	int radius;
+
+	// The range an agent can join a recruiting leader
+	float maxDist;
 
 	// Used as a multiplier for the wander steering force
 	float multi;
-
 };

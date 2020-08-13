@@ -14,9 +14,15 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
+	bool getRecruiting() { return isRecruiting; }
+
 
 
 protected:
+
+
+	bool isRecruiting;// = false
+
 
 
 

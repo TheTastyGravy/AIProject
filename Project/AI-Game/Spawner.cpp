@@ -1,6 +1,7 @@
 #include "Spawner.h"
 #include "Swarmer.h"
 #include "raylib.h"
+#include "WanderStateBehav.h"
 
 Vector2 randPos(int posRange, Vector2 indent);
 
@@ -15,7 +16,8 @@ Spawner::Spawner(Vector2 position, std::shared_ptr<Behaviour> flockingState, flo
 {
 	addTag(Tag::Spawner);
 
-	//TODO: create wander state
+	// Create a wander behaviour for this spawner
+	wander = std::make_shared<WanderStateBehav>(position, radius);
 }
 
 Spawner::~Spawner()

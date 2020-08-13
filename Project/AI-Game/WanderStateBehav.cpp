@@ -10,6 +10,14 @@
 std::map<Agent*, Vector2> agentTargetInfo;
 
 
+WanderStateBehav::WanderStateBehav(Vector2 wanderCenter, int wanderRadius, float transitionDistance, float multi) :
+	wandCenter(wanderCenter),
+	radius(wanderRadius),
+	maxDist(transitionDistance),
+	multi(multi)
+{
+}
+
 WanderStateBehav::~WanderStateBehav()
 {
 }
@@ -17,17 +25,30 @@ WanderStateBehav::~WanderStateBehav()
 
 void WanderStateBehav::setup(Agent* agent)
 {
-	//new target
+	// Find a new random target within the area
+	agentTargetInfo[agent] = { (float)(rand() % radius + wandCenter.x - radius*0.5f), (float)(rand() % radius + wandCenter.y - radius*0.5f) };
 }
 
 Vector2 WanderStateBehav::update(Agent* agent, float deltaTime)
 {
-	//get vector of leaders from GameManager
-	//check recruiting flag
-	//check distance from agent
-	//if close enough, call func to enter flocking
-	//continue
+	// ---------- TRANSITION ----------
 
+	// Itterate through all leaders in the game
+	for (auto obj : GameManager::searchForTag(Tag::Leader))
+	{
+		// Cast to a Leader pointer
+		Leader* leader = (Leader*)obj;
+
+		// If the leader is recruiting...
+		if (leader->getRecruiting())
+		{
+			// ...and within range, enter the flocking state
+			if (Vector2Distance(agent->getPos(), leader->getPos()) <= maxDist)
+			{
+				((Swarmer*)agent)->enterFlocking(1.0f, leader);
+			}
+		}
+	}
 
 
 	// ---------- WANDER FORCE ----------
@@ -35,7 +56,8 @@ Vector2 WanderStateBehav::update(Agent* agent, float deltaTime)
 	// If the agent is close to the target, get a new one
 	if (Vector2Distance(agentTargetInfo[agent], agent->getPos()) < 5.0f)
 	{
-		//new target
+		// Setup gets a random target
+		setup(agent);
 	}
 
 

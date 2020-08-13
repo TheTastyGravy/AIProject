@@ -4,7 +4,7 @@
 #include "raylib.h"
 #include "GameManager.h"
 
-
+#include "Spawner.h"
 
 
 void GameApp::run()
@@ -27,10 +27,10 @@ void GameApp::run()
 void GameApp::update(std::vector<GameObject*>& objects)
 {
 	float deltaTime = GetFrameTime();
-
+	
 	// Update objects
-	for (auto object : objects)
-		object->update(deltaTime);
+	for (int i = 0; i < objects.size(); i++)
+		objects[i]->update(deltaTime);
 }
 
 void GameApp::draw(std::vector<GameObject*>& objects)
@@ -56,7 +56,8 @@ void GameApp::startup(Vector2 screenSize)
 	SetTargetFPS(60);
 
 
-	//create objects
+	//create a spawner
+	new Spawner({ 200, 200 }, nullptr);
 }
 
 void GameApp::shutdown()

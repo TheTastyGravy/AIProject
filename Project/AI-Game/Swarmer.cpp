@@ -39,6 +39,9 @@ void Swarmer::enterFlocking(float importance, Leader* leader)
 	this->importance = importance;
 	this->leader = leader;
 
+	// Remove any current behaviours
+	behaviours.clear();
+
 	//TODO: update state & set flocking's neibourhood
 }
 
@@ -50,6 +53,9 @@ void Swarmer::enterFormation(float importance, Agent* leaderObj, Vector2 offset)
 	// A swarmer cant enter formation unless it has a ref to a leader
 	if (leader == nullptr)
 		return;
+
+	// Remove any current behaviours
+	behaviours.clear();
 
 	//TODO: create formation state, then set it
 }
