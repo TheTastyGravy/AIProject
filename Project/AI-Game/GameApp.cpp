@@ -5,6 +5,10 @@
 #include "GameManager.h"
 
 #include "Spawner.h"
+#include "Swarmer.h"
+#include "Leader.h"
+
+#include "FlockingStateBehav.h"
 
 
 void GameApp::run()
@@ -56,8 +60,13 @@ void GameApp::startup(Vector2 screenSize)
 	SetTargetFPS(60);
 
 
+
+	std::shared_ptr<Behaviour> flock = std::make_shared<FlockingStateBehav>(40.0f, 20.0f);
+
 	//create a spawner
-	new Spawner({ 200, 200 }, nullptr);
+	new Spawner({ 200, 200 }, flock);
+
+	new Leader({ 400, 400 }, 10.0f);
 }
 
 void GameApp::shutdown()

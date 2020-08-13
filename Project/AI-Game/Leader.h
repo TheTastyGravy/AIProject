@@ -24,12 +24,12 @@ public:
 	bool getRecruiting() const { return isRecruiting; }
 	bool setRecruiting(bool isRecruiting) { this->isRecruiting = isRecruiting; }
 
-	// Returns a reference to this leaders swarm
-	std::vector<Swarmer*>& getSwarm() { return swarm; }
+	// Returns a vector of this leaders swarm
+	std::vector<Swarmer*> getSwarm() { return swarm; }
 	int getSwarmSize() const { return swarm.size(); }
 
-	// Returns a reference to this leaders formation members
-	std::vector<Swarmer*>& getFormation() { return formation; }
+	// Returns a vector of this leaders formation members
+	std::vector<Swarmer*> getFormation() { return formation; }
 
 protected:
 	std::vector<Swarmer*> swarm;

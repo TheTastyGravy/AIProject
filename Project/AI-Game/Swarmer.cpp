@@ -35,27 +35,26 @@ void Swarmer::draw()
 
 void Swarmer::enterFlocking(float importance, Leader* leader)
 {
-	// Update importance and leader
+	// Update importance and leader, and join its swarm
 	this->importance = importance;
 	this->leader = leader;
-
-	// Remove any current behaviours
+	leader->joinSwarm(this);
+	// Remove any current behaviours and set current to flocking
 	behaviours.clear();
-
-	//TODO: update state & set flocking's neibourhood
+	addBehaviour(flocking);
 }
 
 void Swarmer::enterFormation(float importance, Agent* leaderObj, Vector2 offset)
 {
-	// Update importacne
-	this->importance = importance;
-
 	// A swarmer cant enter formation unless it has a ref to a leader
 	if (leader == nullptr)
 		return;
 
+	// Update importacne
+	this->importance = importance;
 	// Remove any current behaviours
 	behaviours.clear();
+
 
 	//TODO: create formation state, then set it
 }
@@ -69,8 +68,8 @@ void Swarmer::dealDamage(int damage)
 	if (health <= 0)
 	{
 		// If this has a leader, remove this from it's swarm
-		//if (leader != nullptr)
-		//	leader.remove(this);
+		if (leader != nullptr)
+			leader->leaveSwarm(this);
 		
 		// Delete this swarmer
 		delete this;

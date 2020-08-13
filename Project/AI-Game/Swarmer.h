@@ -24,6 +24,8 @@ public:
 
 	// Returns this boid's importance value
 	virtual float getImportance() const { return importance; }
+	// Return a pointer to this swarmers leader. nullptr if it doesnt have one
+	virtual Leader* getLeader() const { return leader; }
 	// Reduces health by 'damage', and if it reaches 0, destroys the swarmer
 	virtual void dealDamage(int damage);
 
