@@ -63,6 +63,9 @@
     <ClCompile Include="FlockingStateBehav.cpp">
       <Filter>Source Files\Behaviours/States</Filter>
     </ClCompile>
+    <ClCompile Include="FormationStateBehav.cpp">
+      <Filter>Source Files\Behaviours/States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="FlockingStateBehav.h">
       <Filter>Header Files\Behaviours/States</Filter>
+    </ClInclude>
+    <ClInclude Include="FormationStateBehav.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

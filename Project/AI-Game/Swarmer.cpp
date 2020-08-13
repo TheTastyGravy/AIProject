@@ -1,6 +1,7 @@
 #include "Swarmer.h"
 #include "Leader.h"
 #include "raylib.h"
+#include "FormationStateBehav.h"
 
 
 Swarmer::Swarmer(Vector2 position, std::shared_ptr<Behaviour> flockingState, int health) :
@@ -55,8 +56,8 @@ void Swarmer::enterFormation(float importance, Agent* leaderObj, Vector2 offset)
 	// Remove any current behaviours
 	behaviours.clear();
 
-
-	//TODO: create formation state, then set it
+	// Add a new formation state to be the current behaviour
+	addBehaviour(std::make_shared<FormationStateBehav>(leaderObj, offset));
 }
 
 
