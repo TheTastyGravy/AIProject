@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Graph2D.h"
+#include <string>
 
 
 class GameManager
@@ -21,8 +22,8 @@ public:
 
 	// Find a path from 'start' to 'finish' and retun a vector of nodes closest to thoes points
 	static std::vector<Graph2D::Node*> findPath(Vector2 start, Vector2 end);
-	// Load the graph. Returns true if successful
-	static bool loadGraph();
+	// Load the graph and walls from the map. Returns true if successful
+	static bool loadMap(std::string fileName, const int screenHight, const int screenWidth, const int mapHight, const int mapWidth);
 
 private:
 	GameManager() {}

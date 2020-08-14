@@ -69,6 +69,9 @@
     <ClCompile Include="KeyboardBehaviour.cpp">
       <Filter>Source Files\Behaviours/States</Filter>
     </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Source Files\Game objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="KeyboardBehaviour.h">
       <Filter>Header Files\Behaviours/States</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Header Files\Game objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

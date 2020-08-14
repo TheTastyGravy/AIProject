@@ -1,4 +1,9 @@
 #include "GameManager.h"
+#include "Wall.h"
+#include <vector>
+#include <fstream>
+#include <iostream>
+#include <functional>
 
 std::vector<GameObject*> GameManager::pool;
 std::vector<GameObject*> GameManager::leaders;
@@ -140,9 +145,88 @@ std::vector<Graph2D::Node*> GameManager::findPath(Vector2 start, Vector2 end)
 	return std::vector<Graph2D::Node*>();
 }
 
-bool GameManager::loadGraph()
+bool GameManager::loadMap(std::string fileName, const int screenHight, const int screenWidth, const int mapHight, const int mapWidth)
 {
-	//TODO: load graph
+	// The range nodes will connect at
+	const float LINK_RANGE = 50.0f;
+	// How large each cell on the map is
+	const Vector2 CELL_SIZE = { screenWidth / mapWidth, screenHight / mapHight };
+	// 2D vector for file data
+	std::vector< std::vector<int> > map;
+	
 
-	return false;
+	// Open file and check it opened properly
+	std::ifstream file;
+	file.open(fileName);
+	if (!file.is_open())
+	{
+		std::cout << "Failed to open file" << std::endl;
+		return false;
+	}
+
+	// Fill the map from the file
+	std::string line;
+	while (std::getline(file, line))
+	{
+		// Add another vector, then fill it with the line, and add it to the map
+		std::vector<int> vec;
+		for (auto itter : line)
+		{
+			vec.push_back(itter);
+		}
+		map.push_back(vec);
+	}
+
+	// Display success and close file
+	std::cout << "File read successfuly" << std::endl;
+	file.close();
+
+
+	// List of nodes to make adding new ones easier
+	std::vector<Graph2D::Node*> nodes;
+	// Create a node at 'pos' with links to any other nodes within range
+	std::function<Graph2D::Node * (Vector2)> createNodeWithLinks = [&LINK_RANGE, &nodes](Vector2 pos)
+	{
+		// Create node at the passed position
+		Graph2D::Node* newNode = graph.addNode(pos);
+
+		// Link any nodes close by
+		for (auto node : nodes)
+		{
+			// If the nodes are close and its not the new node, link them
+			if (Vector2Distance(node->data, newNode->data) <= LINK_RANGE)
+			{
+				// Use the distance between them as the weight
+				int dist = (int)Vector2Distance(node->data, newNode->data);
+				node->addEdge(newNode, dist);
+				newNode->addEdge(node, dist);
+			}
+		}
+
+		// Add the node to the list, and return its pointer
+		nodes.push_back(newNode);
+		return newNode;
+	};
+
+	// Read map
+	for (int y = 0; y < mapHight; y++)
+	{
+		for (int x = 0; x < mapWidth; x++)
+		{
+			if (map[y][x] == '0')
+			{
+				// Cell is empty, so create a node
+				createNodeWithLinks({ x * CELL_SIZE.x, y * CELL_SIZE.y });
+			}
+			else if (map[y][x] == '1')
+			{
+				// Cell is a wall, so create one
+				new Wall({ x * CELL_SIZE.x, y * CELL_SIZE.y }, CELL_SIZE);
+			}
+		}
+	}
+
+
+	// File read succesfully, so return true
+	return true;
 }

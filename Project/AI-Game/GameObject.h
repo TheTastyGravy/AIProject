@@ -9,7 +9,8 @@ enum class Tag
 	Swarmer,
 	Leader,
 	Spawner,
-	Player
+	Player,
+	Wall
 };
 
 

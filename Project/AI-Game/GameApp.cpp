@@ -61,6 +61,8 @@ void GameApp::startup(Vector2 screenSize)
 	InitWindow(SCREEN_WIDTH, SCREEN_HIGHT, "AI Game");
 	SetTargetFPS(60);
 
+	// Load walls and graph from file
+	GameManager::loadMap("map.txt", SCREEN_HIGHT, SCREEN_WIDTH, 10, 10);
 
 
 	std::shared_ptr<Behaviour> flock = std::make_shared<FlockingStateBehav>(35.0f, 10.0f, //flock radius
