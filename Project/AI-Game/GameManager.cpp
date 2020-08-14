@@ -140,9 +140,16 @@ void GameManager::updateLeader(GameObject* obj, bool adding)
 
 std::vector<Graph2D::Node*> GameManager::findPath(Vector2 start, Vector2 end)
 {
-	//TODO: add pathfinding stuff
+	// Find the target nodes
+	Graph2D::Node* startNode = graph.findClosestNode(start);
+	Graph2D::Node* endNode = graph.findClosestNode(end);
 
-	return std::vector<Graph2D::Node*>();
+	// Get a path from start to end
+	std::vector<Graph2D::Node*> nodes;
+	graph.findPath(startNode, endNode, nodes);
+
+	// Return the path. If there is no path, it will be empty
+	return nodes;
 }
 
 bool GameManager::loadMap(std::string fileName, const int screenHight, const int screenWidth, const int mapHight, const int mapWidth)

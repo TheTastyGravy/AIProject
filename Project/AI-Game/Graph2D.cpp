@@ -130,3 +130,33 @@ bool Graph2D::findPath(Node* start, Node* end, std::vector<Node*>& outPath) cons
 	getPath(end, outPath);
 	return true;
 }
+
+
+Graph2D::Node* Graph2D::findClosestNode(const Vector2& pos) const
+{
+	// If there are no nodes, return nullptr
+	if (nodes.empty())
+		return nullptr;
+
+
+	// Start with the first node being the best
+	Node* bestNode = nodes[0];
+	float bestDist = Vector2Distance(pos, bestNode->data);
+
+	// Itterate through each node
+	for (auto node : nodes)
+	{
+		// Get the distance from the node to the target position
+		float dist = Vector2Distance(pos, node->data);
+
+		// If this node is closer, its the best node
+		if (dist < bestDist)
+		{
+			bestNode = node;
+			bestDist = dist;
+		}
+	}
+
+	// Return the closest node
+	return bestNode;
+}

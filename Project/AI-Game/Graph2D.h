@@ -16,4 +16,7 @@ public:
 
 	// Set 'outPath' to the full path from 'start' to 'end'. Retuns false if no path was found
 	bool findPath(Node* start, Node* end, std::vector<Node*>& outPath) const;
+
+	// Returns the closest node to 'pos'
+	Node* findClosestNode(const Vector2& pos) const;
 };
