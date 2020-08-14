@@ -22,7 +22,7 @@ public:
 	float getImportance() const { return importance; }
 
 	bool getRecruiting() const { return isRecruiting; }
-	bool setRecruiting(bool isRecruiting) { this->isRecruiting = isRecruiting; }
+	void setRecruiting(bool isRecruiting) { this->isRecruiting = isRecruiting; }
 
 	// Returns a vector of this leaders swarm
 	std::vector<Swarmer*> getSwarm() { return swarm; }

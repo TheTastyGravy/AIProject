@@ -14,7 +14,7 @@ public:
 	virtual ~Swarmer();
 
 
-	virtual void update(float deltaTime);
+	// Use Agent::update()
 	virtual void draw();
 
 	// Enter the flocking state

@@ -38,7 +38,6 @@ void Agent::update(float deltaTime)
 		force = Vector2Add(force, behavForce);
 	}
 
-
 	// Add force * delta time
 	velocity = Vector2Add(velocity, Vector2Scale(force, deltaTime));
 

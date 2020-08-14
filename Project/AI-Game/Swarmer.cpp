@@ -5,7 +5,7 @@
 
 
 Swarmer::Swarmer(Vector2 position, std::shared_ptr<Behaviour> flockingState, int health) :
-	Agent(position),
+	Agent(position, 200.0f),
 	importance(0.0f),
 	leader(nullptr),
 	health(health),
@@ -18,14 +18,6 @@ Swarmer::~Swarmer()
 {
 }
 
-
-void Swarmer::update(float deltaTime)
-{
-	//behavs are called in agent::update
-	Agent::update(deltaTime);
-
-	//an override might not be nessesary
-}
 
 void Swarmer::draw()
 {

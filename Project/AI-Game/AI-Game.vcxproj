@@ -163,6 +163,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Graph2D.cpp" />
+    <ClCompile Include="KeyboardBehaviour.cpp" />
     <ClCompile Include="Leader.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Spawner.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graph2D.h" />
     <ClInclude Include="GraphClass.h" />
+    <ClInclude Include="KeyboardBehaviour.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Transition.h" />
     <ClInclude Include="Leader.h" />

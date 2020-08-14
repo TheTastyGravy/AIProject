@@ -10,6 +10,8 @@
 
 #include "FlockingStateBehav.h"
 
+#include "KeyboardBehaviour.h"
+
 
 void GameApp::run()
 {
@@ -61,12 +63,17 @@ void GameApp::startup(Vector2 screenSize)
 
 
 
-	std::shared_ptr<Behaviour> flock = std::make_shared<FlockingStateBehav>(40.0f, 20.0f);
+	std::shared_ptr<Behaviour> flock = std::make_shared<FlockingStateBehav>(35.0f, 10.0f, //flock radius
+																			90.0f, 15.0f, 10.0f, //wander vals
+																			3.0f, 2.5f, 3.0f, 1.0f); //weights
 
 	//create a spawner
-	new Spawner({ 200, 200 }, flock);
+	new Spawner({ 200, 200 }, flock, 0.5f);
 
-	new Leader({ 400, 400 }, 10.0f);
+	//control a leader for testing
+	Leader* player = new Leader({ 400, 400 }, 100.0f);
+	player->addBehaviour(std::make_shared<KeyboardBehaviour>());
+	player->setRecruiting(true);
 }
 
 void GameApp::shutdown()

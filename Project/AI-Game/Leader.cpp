@@ -11,6 +11,7 @@ Leader::Leader(Vector2 position, float importance) :
 	importance(importance),
 	rotation(0.0f)
 {
+	addTag(Tag::Leader);
 }
 
 Leader::~Leader()
