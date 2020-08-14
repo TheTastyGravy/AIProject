@@ -10,7 +10,9 @@ class Agent;
 class State
 {
 public:
-	State() {}
+	State() :
+		transitions()
+	{}
 	virtual ~State() {}
 
 

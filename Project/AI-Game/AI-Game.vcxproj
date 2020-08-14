@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="FindPlayerState.cpp" />
     <ClCompile Include="FlockingStateBehav.cpp" />
     <ClCompile Include="FormationStateBehav.cpp" />
     <ClCompile Include="GameApp.cpp" />
@@ -175,6 +176,7 @@
   <ItemGroup>
     <ClInclude Include="Agent.h" />
     <ClInclude Include="Behaviour.h" />
+    <ClInclude Include="FindPlayerState.h" />
     <ClInclude Include="FlockingStateBehav.h" />
     <ClInclude Include="FormationStateBehav.h" />
     <ClInclude Include="GameApp.h" />

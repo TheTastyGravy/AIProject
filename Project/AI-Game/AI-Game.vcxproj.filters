@@ -72,6 +72,9 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Source Files\Game objects</Filter>
     </ClCompile>
+    <ClCompile Include="FindPlayerState.cpp">
+      <Filter>Source Files\Behaviours/States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -119,14 +122,17 @@
     <ClInclude Include="FlockingStateBehav.h">
       <Filter>Header Files\Behaviours/States</Filter>
     </ClInclude>
-    <ClInclude Include="FormationStateBehav.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="KeyboardBehaviour.h">
       <Filter>Header Files\Behaviours/States</Filter>
     </ClInclude>
     <ClInclude Include="Wall.h">
       <Filter>Header Files\Game objects</Filter>
+    </ClInclude>
+    <ClInclude Include="FindPlayerState.h">
+      <Filter>Header Files\Behaviours/States</Filter>
+    </ClInclude>
+    <ClInclude Include="FormationStateBehav.h">
+      <Filter>Header Files\Behaviours/States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
