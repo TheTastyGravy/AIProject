@@ -72,7 +72,7 @@ void GameApp::startup(Vector2 screenSize)
 	SetTargetFPS(60);
 
 	// Load walls and graph from file
-	GameManager::loadMap("map.txt", SCREEN_HIGHT, SCREEN_WIDTH, 10, 10);
+	GameManager::loadMap("map.txt", SCREEN_HIGHT, SCREEN_WIDTH, 10, 16);
 
 
 	std::shared_ptr<Behaviour> flock = std::make_shared<FlockingStateBehav>(35.0f, 10.0f, //flock radius
@@ -80,10 +80,10 @@ void GameApp::startup(Vector2 screenSize)
 																			3.0f, 2.5f, 3.0f, 1.0f); //weights
 
 	//create a spawner
-	new Spawner({ 200, 250 }, flock, 0.5f);
+	new Spawner({ 150, 250 }, flock, 0.5f);
 
 	//control a leader for testing
-	Leader* player = new Leader({ 370, 400 }, 100.0f);
+	Leader* player = new Leader({ 450, 500 }, 100.0f);
 	player->addBehaviour(std::make_shared<KeyboardBehaviour>());
 	player->setRecruiting(true);
 }
