@@ -37,6 +37,10 @@ void GameApp::update(std::vector<GameObject*>& objects)
 	// Update objects
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->update(deltaTime);
+
+	// Toggle showInfo on tab
+	if (IsKeyPressed(KEY_TAB))
+		showInfo = !showInfo;
 }
 
 void GameApp::draw(std::vector<GameObject*>& objects)
@@ -47,6 +51,12 @@ void GameApp::draw(std::vector<GameObject*>& objects)
 	// Draw objects
 	for (auto object : objects)
 		object->draw();
+
+	// Show extra information
+	if (showInfo)
+	{
+		GameManager::drawGraph(6);
+	}
 
 	// Draw FPS
 	DrawFPS(5, 5);
@@ -70,10 +80,10 @@ void GameApp::startup(Vector2 screenSize)
 																			3.0f, 2.5f, 3.0f, 1.0f); //weights
 
 	//create a spawner
-	new Spawner({ 200, 200 }, flock, 0.5f);
+	new Spawner({ 200, 250 }, flock, 0.5f);
 
 	//control a leader for testing
-	Leader* player = new Leader({ 400, 400 }, 100.0f);
+	Leader* player = new Leader({ 370, 400 }, 100.0f);
 	player->addBehaviour(std::make_shared<KeyboardBehaviour>());
 	player->setRecruiting(true);
 }

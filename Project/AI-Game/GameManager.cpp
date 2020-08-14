@@ -148,7 +148,7 @@ std::vector<Graph2D::Node*> GameManager::findPath(Vector2 start, Vector2 end)
 bool GameManager::loadMap(std::string fileName, const int screenHight, const int screenWidth, const int mapHight, const int mapWidth)
 {
 	// The range nodes will connect at
-	const float LINK_RANGE = 50.0f;
+	const float LINK_RANGE = 100.0f;
 	// How large each cell on the map is
 	const Vector2 CELL_SIZE = { screenWidth / mapWidth, screenHight / mapHight };
 	// 2D vector for file data
@@ -216,7 +216,7 @@ bool GameManager::loadMap(std::string fileName, const int screenHight, const int
 			if (map[y][x] == '0')
 			{
 				// Cell is empty, so create a node
-				createNodeWithLinks({ x * CELL_SIZE.x, y * CELL_SIZE.y });
+				createNodeWithLinks({ x * CELL_SIZE.x + CELL_SIZE.x*0.5f, y * CELL_SIZE.y + CELL_SIZE.y*0.5f });
 			}
 			else if (map[y][x] == '1')
 			{

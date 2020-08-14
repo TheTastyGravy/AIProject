@@ -24,6 +24,8 @@ public:
 	static std::vector<Graph2D::Node*> findPath(Vector2 start, Vector2 end);
 	// Load the graph and walls from the map. Returns true if successful
 	static bool loadMap(std::string fileName, const int screenHight, const int screenWidth, const int mapHight, const int mapWidth);
+	// Calls the draw function on the graph
+	static void drawGraph(float nodeSize) { graph.draw(nodeSize); }
 
 private:
 	GameManager() {}
