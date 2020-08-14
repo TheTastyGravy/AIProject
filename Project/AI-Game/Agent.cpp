@@ -47,6 +47,16 @@ void Agent::update(float deltaTime)
 		velocity = Vector2Scale(velocity, maxSpeed);
 	}
 
+
+	// Check for collision and adjust velocity accordingly
+	bool collX = false, collY = false;
+	collisionDetection(deltaTime, collX, collY);
+	if (collX)
+		velocity.x = 0.0f;
+	if (collY)
+		velocity.y = 0.0f;
+	
+
 	// Add velocity * dalta time
 	position = Vector2Add(position, Vector2Scale(velocity, deltaTime));
 	// Apply friction

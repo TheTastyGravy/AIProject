@@ -1,6 +1,8 @@
 #include "Leader.h"
 #include "Swarmer.h"
 #include "raylib.h"
+#include "GameManager.h"
+#include "Wall.h"
 
 
 Leader::Leader(Vector2 position, float importance) :
@@ -21,11 +23,8 @@ Leader::~Leader()
 
 void Leader::update(float deltaTime)
 {
-	//TODO: leader logic
-
-	//state machine in agent::update
+	//Run regular behaviours
 	Agent::update(deltaTime);
-
 
 	// Increment rotation
 	rotation += deltaTime * rotationSpeed;
@@ -67,4 +66,23 @@ void Leader::leaveSwarm(Swarmer* swarmer)
 			break;
 		}
 	}
+}
+
+
+void Leader::collisionDetection(float deltaTime, bool& outCollidedX, bool& outCollidedY)
+{
+	// Get walls within proximity of the agent
+	std::vector<GameObject*> walls = GameManager::searchInRadius(Tag::Wall, 200.0f, position);
+
+	for (auto obj : walls)
+	{
+		// If it collided with a wall, set outs and exit
+		if (CheckCollisionCircleRec(Vector2Add(position, Vector2Scale(velocity, deltaTime)), 8, ((Wall*)obj)->getRec()))
+		{
+			outCollidedX = true;
+			outCollidedY = true;
+			return;
+		}
+	}
+	
 }

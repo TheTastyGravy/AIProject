@@ -32,6 +32,9 @@ public:
 	std::vector<Swarmer*> getFormation() { return formation; }
 
 protected:
+	virtual void collisionDetection(float deltaTime, bool& outCollidedX, bool& outCollidedY);
+
+
 	std::vector<Swarmer*> swarm;
 	std::vector<Swarmer*> formation;
 

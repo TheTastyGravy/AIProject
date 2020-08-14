@@ -30,6 +30,14 @@ public:
 	float getFriction() const { return friction; }
 
 protected:
+	// Called by update to determine weather to move or not. Base function sets both to false
+	virtual void collisionDetection(float deltaTime, bool& outCollidedX, bool& outCollidedY)
+	{
+		outCollidedX = false;
+		outCollidedY = false;
+	}
+
+
 	// shared_ptr is used so multiple agents can use the same behaviour
 	std::vector<std::shared_ptr<Behaviour>> behaviours;
 
