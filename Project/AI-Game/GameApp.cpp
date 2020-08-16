@@ -11,7 +11,9 @@
 #include "FlockingStateBehav.h"
 
 #include "StateMachine.h"
+#include "Transition.h"
 #include "FindPlayerState.h"
+#include "AttackState.h"
 
 #include "KeyboardBehaviour.h"
 
@@ -91,13 +93,24 @@ void GameApp::startup(Vector2 screenSize)
 
 	//crate leader with state machine
 	Leader* leader = new Leader({ 450, 500 }, 100.0f);
-
+	leader->setRecruiting(true);
 
 	//create state machine and states
 	std::shared_ptr<StateMachine> stateMachine = std::make_shared<StateMachine>();
 	std::shared_ptr<State> findPlayer = std::make_shared<FindPlayerState>(40.0f, 100.0f);
+	std::shared_ptr<State> attackState = std::make_shared<AttackState>(50.0f);
+
+	std::shared_ptr<Transition> inRangeOfPlayerTrans = std::make_shared<Transition>(attackState.get(), [player](const Agent* agent) -> bool
+	{
+		// When the agent is within range, trigger transition
+		return (Vector2Distance(player->getPos(), agent->getPos()) < 50.0f);
+	});
+	findPlayer->addTransition(inRangeOfPlayerTrans);
+
 
 	stateMachine->addState(findPlayer);
+	stateMachine->addState(attackState);
+
 	findPlayer->setup(leader);
 	stateMachine->setCurrentState(findPlayer.get());
 

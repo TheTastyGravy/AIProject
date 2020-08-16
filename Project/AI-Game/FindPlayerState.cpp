@@ -60,6 +60,7 @@ Vector2 FindPlayerState::update(Agent* agent, float deltaTime)
 		{
 			// Make the swarmer enter a formation in the designated position around the leader
 			swarm[i]->enterFormation(100.0f, agent, offsets[i]);
+			((Leader*)agent)->addToFormation(swarm[i]);
 		}
 	}
 

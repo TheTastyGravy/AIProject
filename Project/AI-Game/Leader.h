@@ -20,6 +20,7 @@ public:
 
 
 	float getImportance() const { return importance; }
+	void setImportance(bool importance) { this->importance = importance; }
 
 	bool getRecruiting() const { return isRecruiting; }
 	void setRecruiting(bool isRecruiting) { this->isRecruiting = isRecruiting; }
@@ -30,6 +31,7 @@ public:
 
 	// Returns a vector of this leaders formation members
 	std::vector<Swarmer*> getFormation() { return formation; }
+	void addToFormation(Swarmer* swarmer) { formation.push_back(swarmer); }
 
 protected:
 	virtual void collisionDetection(float deltaTime, bool& outCollidedX, bool& outCollidedY);
