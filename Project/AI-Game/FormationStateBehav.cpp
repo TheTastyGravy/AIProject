@@ -49,5 +49,5 @@ Vector2 FormationStateBehav::update(Agent* agent, float deltaTime)
 		seekForce = Vector2Subtract(seekForce, agent->getVel());
 	}
 	// Apply the force
-	return Vector2Scale(seekForce, deltaTime);
+	return seekForce;
 }

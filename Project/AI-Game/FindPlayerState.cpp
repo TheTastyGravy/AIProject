@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "Agent.h"
 #include "Leader.h"
+#include "Swarmer.h"
 #include <map>
 
 // Holds an agent's path and what node theyre at
@@ -44,7 +45,22 @@ Vector2 FindPlayerState::update(Agent* agent, float deltaTime)
 	// If the agent is within range of the player and they have no formation members, enter formation
 	if (Vector2Distance(agent->getPos(), player->getPos()) < formationRadius && ((Leader*)agent)->getFormation().empty())
 	{
-		//call enterFormation on some swarmers
+		// Offsets from 'agent' to cause a 'U' formation
+		Vector2 offsets[4];
+		offsets[0] = { 10, 20 };
+		offsets[1] = { 10, -20 };
+		offsets[2] = { 30, 40 };
+		offsets[3] = { 30, -40 };
+
+
+		std::vector<Swarmer*> swarm = ((Leader*)agent)->getSwarm();
+
+		// Loop through 4 swarmers, or as many as avalable
+		for (int i = 0; i < 4 && i < swarm.size(); i++)
+		{
+			// Make the swarmer enter a formation in the designated position around the leader
+			swarm[i]->enterFormation(100.0f, agent, offsets[i]);
+		}
 	}
 
 
