@@ -13,6 +13,7 @@
 #include "StateMachine.h"
 #include "Transition.h"
 #include "FindPlayerState.h"
+#include "RecruitmentState.h"
 #include "AttackState.h"
 
 #include "KeyboardBehaviour.h"
@@ -97,9 +98,20 @@ void GameApp::startup(Vector2 screenSize)
 
 	//create state machine and states
 	std::shared_ptr<StateMachine> stateMachine = std::make_shared<StateMachine>();
+	std::shared_ptr<State> recruitState = std::make_shared<RecruitmentState>();
 	std::shared_ptr<State> findPlayer = std::make_shared<FindPlayerState>(40.0f, 100.0f);
 	std::shared_ptr<State> attackState = std::make_shared<AttackState>(50.0f);
 
+
+	// recruit -> findPlayer
+	std::shared_ptr<Transition> swarmSizeHighTrans = std::make_shared<Transition>(findPlayer.get(), [](const Agent* agent) -> bool
+	{
+		// When the swarm is at least 50, trigger transition
+		return (((Leader*)agent)->getSwarmSize() > 50);
+	});
+	recruitState->addTransition(swarmSizeHighTrans);
+
+	// findPlayer -> attack
 	std::shared_ptr<Transition> inRangeOfPlayerTrans = std::make_shared<Transition>(attackState.get(), [player](const Agent* agent) -> bool
 	{
 		// When the agent is within range, trigger transition
@@ -109,6 +121,7 @@ void GameApp::startup(Vector2 screenSize)
 
 
 	stateMachine->addState(findPlayer);
+	stateMachine->addState(recruitState);
 	stateMachine->addState(attackState);
 
 	findPlayer->setup(leader);
