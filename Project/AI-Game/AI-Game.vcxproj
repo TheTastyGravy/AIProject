@@ -159,6 +159,7 @@
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="AttackState.cpp" />
     <ClCompile Include="FindPlayerState.cpp" />
+    <ClCompile Include="FindSpawnerState.cpp" />
     <ClCompile Include="FlockingStateBehav.cpp" />
     <ClCompile Include="FormationStateBehav.cpp" />
     <ClCompile Include="GameApp.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="KeyboardBehaviour.cpp" />
     <ClCompile Include="Leader.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="RecruitmentState.cpp" />
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Swarmer.cpp" />
@@ -179,6 +181,7 @@
     <ClInclude Include="AttackState.h" />
     <ClInclude Include="Behaviour.h" />
     <ClInclude Include="FindPlayerState.h" />
+    <ClInclude Include="FindSpawnerState.h" />
     <ClInclude Include="FlockingStateBehav.h" />
     <ClInclude Include="FormationStateBehav.h" />
     <ClInclude Include="GameApp.h" />
@@ -187,6 +190,7 @@
     <ClInclude Include="Graph2D.h" />
     <ClInclude Include="GraphClass.h" />
     <ClInclude Include="KeyboardBehaviour.h" />
+    <ClInclude Include="RecruitmentState.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Transition.h" />
     <ClInclude Include="Leader.h" />

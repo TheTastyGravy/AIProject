@@ -78,6 +78,12 @@
     <ClCompile Include="AttackState.cpp">
       <Filter>Source Files\Behaviours/States</Filter>
     </ClCompile>
+    <ClCompile Include="RecruitmentState.cpp">
+      <Filter>Source Files\Behaviours/States</Filter>
+    </ClCompile>
+    <ClCompile Include="FindSpawnerState.cpp">
+      <Filter>Source Files\Behaviours/States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -138,6 +144,12 @@
       <Filter>Header Files\Behaviours/States</Filter>
     </ClInclude>
     <ClInclude Include="AttackState.h">
+      <Filter>Header Files\Behaviours/States</Filter>
+    </ClInclude>
+    <ClInclude Include="RecruitmentState.h">
+      <Filter>Header Files\Behaviours/States</Filter>
+    </ClInclude>
+    <ClInclude Include="FindSpawnerState.h">
       <Filter>Header Files\Behaviours/States</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,6 +13,7 @@
 #include "StateMachine.h"
 #include "Transition.h"
 #include "FindPlayerState.h"
+#include "FindSpawnerState.h"
 #include "RecruitmentState.h"
 #include "AttackState.h"
 
@@ -85,6 +86,10 @@ void GameApp::startup(Vector2 screenSize)
 																			90.0f, 15.0f, 10.0f, //wander vals
 																			3.0f, 2.5f, 3.0f, 1.0f); //weights
 	
+	//create a spawner
+	new Spawner({ 150, 250 }, flock, 0.5f);
+
+
 	//control an agent for testing
 	Agent* player = new Agent({ 200, 500 });
 	player->addTag(Tag::Player);
@@ -101,7 +106,16 @@ void GameApp::startup(Vector2 screenSize)
 	std::shared_ptr<State> recruitState = std::make_shared<RecruitmentState>();
 	std::shared_ptr<State> findPlayer = std::make_shared<FindPlayerState>(40.0f, 100.0f);
 	std::shared_ptr<State> attackState = std::make_shared<AttackState>(50.0f);
+	std::shared_ptr<State> findSpawner = std::make_shared<FindSpawnerState>(40.0f);
 
+	//add states to state machine
+	stateMachine->addState(findPlayer);
+	stateMachine->addState(recruitState);
+	stateMachine->addState(attackState);
+	stateMachine->addState(findSpawner);
+
+
+	// ----------- TRANSITIONS ----------
 
 	// recruit -> findPlayer
 	std::shared_ptr<Transition> swarmSizeHighTrans = std::make_shared<Transition>(findPlayer.get(), [](const Agent* agent) -> bool
@@ -119,20 +133,42 @@ void GameApp::startup(Vector2 screenSize)
 	});
 	findPlayer->addTransition(inRangeOfPlayerTrans);
 
+	// attack -> findSpawner
+	std::shared_ptr<Transition> swarmSizeLowTrans = std::make_shared<Transition>(findSpawner.get(), [](const Agent* agent) -> bool
+	{
+		// When the swarm is below 10, trigger transition
+		return (((Leader*)agent)->getSwarmSize() < 10);
+	});
+	attackState->addTransition(swarmSizeLowTrans);
 
-	stateMachine->addState(findPlayer);
-	stateMachine->addState(recruitState);
-	stateMachine->addState(attackState);
+	// findSpawner -> recruit
+	std::shared_ptr<Transition> inRangeOfSpawnerTrans = std::make_shared<Transition>(recruitState.get(), [](const Agent* agent) -> bool
+	{
+		// Get spawners
+		std::vector<GameObject*> spawners = GameManager::searchForTag(Tag::Spawner);
 
-	findPlayer->setup(leader);
-	stateMachine->setCurrentState(findPlayer.get());
+		// If within range of any spawner (agent could come within range of spawner besides their target), trigger transition
+		for (auto itter : spawners)
+		{
+			if (Vector2Distance(itter->getPos(), agent->getPos()) < 40.0f)
+				return true;
+		}
+
+		// Not close enough to any spawners, no triggered
+		return false;;
+	});
+	findSpawner->addTransition(inRangeOfSpawnerTrans);
 
 
+	//setup state machine
+	findSpawner->setup(leader);
+	stateMachine->setCurrentState(findSpawner.get());
+
+	//add state machine to leader
 	leader->addBehaviour(stateMachine);
 
 
-	//create a spawner
-	new Spawner({ 150, 250 }, flock, 0.5f);
+	
 }
 
 void GameApp::shutdown()
