@@ -9,7 +9,7 @@
 struct UniquePath
 {
 	std::vector<Graph2D::Node*> path;
-	Graph2D::Node* currentNode;
+	Graph2D::Node* currentNode = nullptr;
 
 	float timePassed = 0.0f;
 };
@@ -106,7 +106,7 @@ Vector2 FindPlayerState::update(Agent* agent, float deltaTime)
 		//------------------------------------
 
 		//for some reason this works, but the abouve one doesnt, despite doing the same thing. this can stay for now
-		int i = 0;
+		size_t i = 0;
 
 		// find the index of the current node
 		for (auto itter : pathInfo[agent].path)

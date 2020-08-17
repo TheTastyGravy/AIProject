@@ -33,7 +33,7 @@ void Spawner::update(float deltaTime)
 	if (timePassed >= timeDelay)
 	{
 		// Find a radom position around the spawner
-		Vector2 pos = randPos(radius*2, Vector2SubtractValue(position, radius));
+		Vector2 pos = randPos((int)radius*2, Vector2SubtractValue(position, radius));
 		// Create a new agent at that position
 		Agent* swarmer = new Swarmer(pos, flocking, 5);
 		// Set the active state as wander

@@ -27,7 +27,7 @@ public:
 
 	// Returns a vector of this leaders swarm
 	std::vector<Swarmer*> getSwarm() { return swarm; }
-	int getSwarmSize() const { return swarm.size(); }
+	int getSwarmSize() const { return (int)swarm.size(); }
 
 	// Returns a vector of this leaders formation members
 	std::vector<Swarmer*> getFormation() { return formation; }
