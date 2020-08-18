@@ -10,7 +10,7 @@ class Spawner :
 	public GameObject
 {
 public:
-	Spawner(Vector2 position, std::shared_ptr<Behaviour> flockingState, float timeDelay = 0.5f, float radius = 50.0f);
+	Spawner(Vector2 position, std::shared_ptr<Behaviour> flockingState, int swarmerHealth, float timeDelay = 0.5f, float radius = 50.0f);
 	virtual ~Spawner();
 
 
@@ -24,6 +24,9 @@ protected:
 	float timeDelay;
 	// The area where swarmers can be created, and will wander around
 	float radius;
+
+	// How much health swarmers are created with
+	int swarmerHealth;
 
 	// Behaviours passed to a swarmer when its created
 	std::shared_ptr<Behaviour> wander;

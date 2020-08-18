@@ -6,11 +6,12 @@
 Vector2 randPos(int posRange, Vector2 indent);
 
 
-Spawner::Spawner(Vector2 position, std::shared_ptr<Behaviour> flockingState, float timeDelay, float radius) :
+Spawner::Spawner(Vector2 position, std::shared_ptr<Behaviour> flockingState, int swarmerHealth, float timeDelay, float radius) :
 	GameObject(position),
 	timePassed(0.0f),
 	timeDelay(timeDelay),
 	radius(radius),
+	swarmerHealth(swarmerHealth),
 	wander(),
 	flocking(flockingState)
 {
@@ -35,7 +36,7 @@ void Spawner::update(float deltaTime)
 		// Find a radom position around the spawner
 		Vector2 pos = randPos((int)radius*2, Vector2SubtractValue(position, radius));
 		// Create a new agent at that position
-		Agent* swarmer = new Swarmer(pos, flocking, 5);
+		Agent* swarmer = new Swarmer(pos, flocking, swarmerHealth);
 		// Set the active state as wander
 		swarmer->addBehaviour(wander);
 

@@ -14,8 +14,7 @@
 #include "AttackState.h"
 #include "FindSpawnerState.h"
 
-// Used for temp player
-#include "KeyboardBehaviour.h"
+#include "Player.h"
 
 
 void GameApp::run()
@@ -79,17 +78,14 @@ void GameApp::startup(Vector2 screenSize)
 	GameManager::loadMap("map.txt", SCREEN_HIGHT, SCREEN_WIDTH, 10, 16);
 
 
+	// Create player agent
+	Agent* player = new Player({ 800, 470 }, 30.0f, 30.0f);
+
 	// Flocking behaviour and spawner
 	std::shared_ptr<Behaviour> flock = std::make_shared<FlockingStateBehav>(35.0f, 10.0f, //flock radius
 																			90.0f, 15.0f, 10.0f, //wander vals
 																			3.0f, 2.5f, 3.0f, 1.0f); //weights
-	new Spawner({ 150, 250 }, flock, 0.5f);
-
-
-	// Temp player agent
-	Agent* player = new Agent({ 200, 500 });
-	player->addTag(Tag::Player);
-	player->addBehaviour(std::make_shared<KeyboardBehaviour>());
+	new Spawner({ 150, 250 }, flock, 20, 0.5f);
 
 
 	// Create state machine with states

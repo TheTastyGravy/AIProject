@@ -66,9 +66,6 @@
     <ClCompile Include="FormationStateBehav.cpp">
       <Filter>Source Files\Behaviours/States</Filter>
     </ClCompile>
-    <ClCompile Include="KeyboardBehaviour.cpp">
-      <Filter>Source Files\Behaviours/States</Filter>
-    </ClCompile>
     <ClCompile Include="Wall.cpp">
       <Filter>Source Files\Game objects</Filter>
     </ClCompile>
@@ -83,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="FindSpawnerState.cpp">
       <Filter>Source Files\Behaviours/States</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Game objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,9 +131,6 @@
     <ClInclude Include="FlockingStateBehav.h">
       <Filter>Header Files\Behaviours/States</Filter>
     </ClInclude>
-    <ClInclude Include="KeyboardBehaviour.h">
-      <Filter>Header Files\Behaviours/States</Filter>
-    </ClInclude>
     <ClInclude Include="Wall.h">
       <Filter>Header Files\Game objects</Filter>
     </ClInclude>
@@ -151,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="FindSpawnerState.h">
       <Filter>Header Files\Behaviours/States</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Game objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
