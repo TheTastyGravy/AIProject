@@ -5,16 +5,20 @@
 #include "Swarmer.h"
 #include <map>
 
-// Holds an agent's path and what node theyre at
-struct UniquePath
+// Use a namespace to avoid global namespace (FPS = FindPlayerState)
+namespace FPS
 {
-	std::vector<Graph2D::Node*> path;
-	Graph2D::Node* currentNode = nullptr;
+	// Holds an agent's path and what node theyre at
+	struct UniquePath
+	{
+		std::vector<Graph2D::Node*> path;
+		Graph2D::Node* currentNode = nullptr;
 
-	float timePassed = 0.0f;
-};
-// Map using the agent's pointer as the key
-std::map<Agent*, UniquePath> pathInfo;
+		float timePassed = 0.0f;
+	};
+	// Map using the agent's pointer as the key
+	std::map<Agent*, UniquePath> pathInfo;
+}
 
 
 FindPlayerState::FindPlayerState(float arriveRadius, float formationRadius) :
@@ -35,9 +39,9 @@ void FindPlayerState::setup(Agent* agent)
 	player = GameManager::searchForTag(Tag::Player).front();
 
 	// Find a path from this agent to the player
-	pathInfo[agent].path = GameManager::findPath(agent->getPos(), player->getPos());
+	FPS::pathInfo[agent].path = GameManager::findPath(agent->getPos(), player->getPos());
 	// The first node is the starting one
-	pathInfo[agent].currentNode = pathInfo[agent].path.front();
+	FPS::pathInfo[agent].currentNode = FPS::pathInfo[agent].path.front();
 }
 
 Vector2 FindPlayerState::update(Agent* agent, float deltaTime)
@@ -67,23 +71,23 @@ Vector2 FindPlayerState::update(Agent* agent, float deltaTime)
 
 
 	// If enough time has passed, get a new path
-	if (pathInfo[agent].timePassed >= 1.0f)
+	if (FPS::pathInfo[agent].timePassed >= 1.0f)
 	{
-		pathInfo[agent].path = GameManager::findPath(agent->getPos(), player->getPos());
-		pathInfo[agent].timePassed = 0.0f;
+		FPS::pathInfo[agent].path = GameManager::findPath(agent->getPos(), player->getPos());
+		FPS::pathInfo[agent].timePassed = 0.0f;
 	}
 	else
 	{
-		pathInfo[agent].timePassed += deltaTime;
+		FPS::pathInfo[agent].timePassed += deltaTime;
 	}
 
 
 	// If there is no target node, something has gone wrong, and a transition should occur
-	if (pathInfo[agent].currentNode == nullptr)
+	if (FPS::pathInfo[agent].currentNode == nullptr)
 		return Vector2Zero();
 	
 	// Get the Vector2 from the current node in the path
-	Vector2 target = pathInfo[agent].currentNode->data;
+	Vector2 target = FPS::pathInfo[agent].currentNode->data;
 
 
 	// If the agent is close to the current node, set current to the next node
@@ -91,17 +95,17 @@ Vector2 FindPlayerState::update(Agent* agent, float deltaTime)
 	{
 		/*bool flag = false;
 
-		for (int i = 0; i < pathInfo[agent].path.size()-1 ; i++)
+		for (int i = 0; i < FPS::pathInfo[agent].path.size()-1 ; i++)
 		{
-			if (pathInfo[agent].currentNode == pathInfo[agent].path[i])
+			if (FPS::pathInfo[agent].currentNode == FPS::pathInfo[agent].path[i])
 			{
-				pathInfo[agent].currentNode = pathInfo[agent].path[i + 1];
+				FPS::pathInfo[agent].currentNode = FPS::pathInfo[agent].path[i + 1];
 				flag = true;
 			}
 		}
 
 		if (!flag)
-			pathInfo[agent].currentNode = pathInfo[agent].path[0];*/
+			FPS::pathInfo[agent].currentNode = FPS::pathInfo[agent].path[0];*/
 
 		//------------------------------------
 
@@ -109,16 +113,16 @@ Vector2 FindPlayerState::update(Agent* agent, float deltaTime)
 		size_t i = 0;
 
 		// find the index of the current node
-		for (auto itter : pathInfo[agent].path)
+		for (auto itter : FPS::pathInfo[agent].path)
 		{
-			if (itter == pathInfo[agent].currentNode)
+			if (itter == FPS::pathInfo[agent].currentNode)
 				break;
 
 			i++;
 		}
 
 		//if index is out of range, use the first node, otherwise use the index
-		pathInfo[agent].currentNode = (i + 1 > pathInfo[agent].path.size()) ? pathInfo[agent].path[0] : pathInfo[agent].path[i + 1];
+		FPS::pathInfo[agent].currentNode = (i + 1 > FPS::pathInfo[agent].path.size()) ? FPS::pathInfo[agent].path[0] : FPS::pathInfo[agent].path[i + 1];
 	}
 
 
@@ -153,4 +157,11 @@ Vector2 FindPlayerState::update(Agent* agent, float deltaTime)
 
 	// Return the final force
 	return seekForce;
+}
+
+void FindPlayerState::shutdown(Agent* agent)
+{
+	// Clear the path as it is no longer needed
+	FPS::pathInfo[agent].path.clear();
+	FPS::pathInfo[agent].currentNode = nullptr;
 }

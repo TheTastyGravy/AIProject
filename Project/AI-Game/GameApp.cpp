@@ -5,18 +5,16 @@
 #include "GameManager.h"
 
 #include "Spawner.h"
-#include "Swarmer.h"
-#include "Leader.h"
-
 #include "FlockingStateBehav.h"
 
+#include "Leader.h"
 #include "StateMachine.h"
-#include "Transition.h"
-#include "FindPlayerState.h"
-#include "FindSpawnerState.h"
 #include "RecruitmentState.h"
+#include "FindPlayerState.h"
 #include "AttackState.h"
+#include "FindSpawnerState.h"
 
+// Used for temp player
 #include "KeyboardBehaviour.h"
 
 
@@ -29,7 +27,6 @@ void GameApp::run()
 	while (!WindowShouldClose())
 	{
 		update(GameManager::getPool());
-
 		draw(GameManager::getPool());
 	}
 
@@ -62,11 +59,11 @@ void GameApp::draw(std::vector<GameObject*>& objects)
 	// Show extra information
 	if (showInfo)
 	{
+		// Draw FPS
+		DrawFPS(5, 5);
+
 		GameManager::drawGraph(6);
 	}
-
-	// Draw FPS
-	DrawFPS(5, 5);
 
 	EndDrawing();
 }
@@ -82,41 +79,32 @@ void GameApp::startup(Vector2 screenSize)
 	GameManager::loadMap("map.txt", SCREEN_HIGHT, SCREEN_WIDTH, 10, 16);
 
 
+	// Flocking behaviour and spawner
 	std::shared_ptr<Behaviour> flock = std::make_shared<FlockingStateBehav>(35.0f, 10.0f, //flock radius
 																			90.0f, 15.0f, 10.0f, //wander vals
 																			3.0f, 2.5f, 3.0f, 1.0f); //weights
-	
-	//create a spawner
 	new Spawner({ 150, 250 }, flock, 0.5f);
 
 
-	//control an agent for testing
+	// Temp player agent
 	Agent* player = new Agent({ 200, 500 });
 	player->addTag(Tag::Player);
 	player->addBehaviour(std::make_shared<KeyboardBehaviour>());
 
 
-
-	//crate leader with state machine
-	Leader* leader = new Leader({ 450, 500 }, 100.0f);
-	leader->setRecruiting(true);
-
-	//create state machine and states
+	// Create state machine with states
 	std::shared_ptr<StateMachine> stateMachine = std::make_shared<StateMachine>();
 	std::shared_ptr<State> recruitState = std::make_shared<RecruitmentState>();
 	std::shared_ptr<State> findPlayer = std::make_shared<FindPlayerState>(40.0f, 100.0f);
 	std::shared_ptr<State> attackState = std::make_shared<AttackState>(50.0f);
 	std::shared_ptr<State> findSpawner = std::make_shared<FindSpawnerState>(40.0f);
-
-	//add states to state machine
-	stateMachine->addState(findPlayer);
+	// Add states to the state machine
 	stateMachine->addState(recruitState);
+	stateMachine->addState(findPlayer);
 	stateMachine->addState(attackState);
 	stateMachine->addState(findSpawner);
 
-
-	// ----------- TRANSITIONS ----------
-
+	// Setup state transitions
 	// recruit -> findPlayer
 	std::shared_ptr<Transition> swarmSizeHighTrans = std::make_shared<Transition>(findPlayer.get(), [](const Agent* agent) -> bool
 	{
@@ -124,7 +112,6 @@ void GameApp::startup(Vector2 screenSize)
 		return (((Leader*)agent)->getSwarmSize() > 50);
 	});
 	recruitState->addTransition(swarmSizeHighTrans);
-
 	// findPlayer -> attack
 	std::shared_ptr<Transition> inRangeOfPlayerTrans = std::make_shared<Transition>(attackState.get(), [player](const Agent* agent) -> bool
 	{
@@ -132,7 +119,6 @@ void GameApp::startup(Vector2 screenSize)
 		return (Vector2Distance(player->getPos(), agent->getPos()) < 50.0f);
 	});
 	findPlayer->addTransition(inRangeOfPlayerTrans);
-
 	// attack -> findSpawner
 	std::shared_ptr<Transition> swarmSizeLowTrans = std::make_shared<Transition>(findSpawner.get(), [](const Agent* agent) -> bool
 	{
@@ -140,7 +126,6 @@ void GameApp::startup(Vector2 screenSize)
 		return (((Leader*)agent)->getSwarmSize() < 10);
 	});
 	attackState->addTransition(swarmSizeLowTrans);
-
 	// findSpawner -> recruit
 	std::shared_ptr<Transition> inRangeOfSpawnerTrans = std::make_shared<Transition>(recruitState.get(), [](const Agent* agent) -> bool
 	{
@@ -160,15 +145,12 @@ void GameApp::startup(Vector2 screenSize)
 	findSpawner->addTransition(inRangeOfSpawnerTrans);
 
 
-	//setup state machine
-	findSpawner->setup(leader);
-	stateMachine->setCurrentState(findSpawner.get());
-
-	//add state machine to leader
+	// Create leader with state machine
+	Leader* leader = new Leader({ 450, 500 }, 100.0f);
 	leader->addBehaviour(stateMachine);
-
-
-	
+	// Set the stae machine's current state
+	stateMachine->setCurrentState(findSpawner.get());
+	findSpawner->setup(leader);
 }
 
 void GameApp::shutdown()
