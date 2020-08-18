@@ -82,10 +82,10 @@ void GameApp::startup(Vector2 screenSize)
 	Agent* player = new Player({ 800, 470 }, 30.0f, 30.0f);
 
 	// Flocking behaviour and spawner
-	std::shared_ptr<Behaviour> flock = std::make_shared<FlockingStateBehav>(35.0f, 10.0f, //flock radius
+	std::shared_ptr<Behaviour> flock = std::make_shared<FlockingStateBehav>(35.0f, 13.0f, //flock radius
 																			90.0f, 15.0f, 10.0f, //wander vals
-																			3.0f, 2.5f, 3.0f, 1.0f); //weights
-	new Spawner({ 150, 250 }, flock, 20, 0.5f);
+																			1.5f, 2.5f, 2.0f, 1.2f); //weights
+	new Spawner({ 150, 250 }, flock, 20, 0.2f);
 
 
 	// Create state machine with states
@@ -142,7 +142,7 @@ void GameApp::startup(Vector2 screenSize)
 
 
 	// Create leader with state machine
-	Leader* leader = new Leader({ 450, 500 }, 100.0f);
+	Leader* leader = new Leader({ 200, 500 }, 500.0f);
 	leader->addBehaviour(stateMachine);
 	// Set the stae machine's current state
 	stateMachine->setCurrentState(findSpawner.get());

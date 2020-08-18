@@ -93,7 +93,7 @@ Vector2 FlockingStateBehav::update(Agent* agent, float deltaTime)
 
 	// ----------   SEEK   ----------
 	// If the agent to too far away from the leader, seek toward them
-	if (Vector2Distance(swarmer->getPos(), swarmer->getLeader()->getPos()) > 100.0f)
+	if (Vector2Distance(swarmer->getPos(), swarmer->getLeader()->getPos()) > 70.0f)
 	{
 		Leader* target = swarmer->getLeader();
 		Vector2 desieredVel{ 0, 0 };
