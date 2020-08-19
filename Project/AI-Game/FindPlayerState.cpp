@@ -93,26 +93,8 @@ Vector2 FindPlayerState::update(Agent* agent, float deltaTime)
 	// If the agent is close to the current node, set current to the next node
 	if (Vector2Distance(agent->getPos(), target) < 17.0f)
 	{
-		/*bool flag = false;
-
-		for (int i = 0; i < FPS::pathInfo[agent].path.size()-1 ; i++)
-		{
-			if (FPS::pathInfo[agent].currentNode == FPS::pathInfo[agent].path[i])
-			{
-				FPS::pathInfo[agent].currentNode = FPS::pathInfo[agent].path[i + 1];
-				flag = true;
-			}
-		}
-
-		if (!flag)
-			FPS::pathInfo[agent].currentNode = FPS::pathInfo[agent].path[0];*/
-
-		//------------------------------------
-
-		//for some reason this works, but the abouve one doesnt, despite doing the same thing. this can stay for now
+		// Find the index of the current node
 		size_t i = 0;
-
-		// find the index of the current node
 		for (auto itter : FPS::pathInfo[agent].path)
 		{
 			if (itter == FPS::pathInfo[agent].currentNode)
@@ -121,8 +103,11 @@ Vector2 FindPlayerState::update(Agent* agent, float deltaTime)
 			i++;
 		}
 
-		//if index is out of range, use the first node, otherwise use the index
-		FPS::pathInfo[agent].currentNode = (i + 1 > FPS::pathInfo[agent].path.size()) ? FPS::pathInfo[agent].path[0] : FPS::pathInfo[agent].path[i + 1];
+		// If the index is out of range, use the first node, otherwise use the index
+		if (i + 1 > FPS::pathInfo[agent].path.size())
+			FPS::pathInfo[agent].currentNode = FPS::pathInfo[agent].path[0];
+		else
+			FPS::pathInfo[agent].currentNode = FPS::pathInfo[agent].path[i + 1];
 	}
 
 

@@ -79,11 +79,8 @@ Vector2 FindSpawnerState::update(Agent* agent, float deltaTime)
 	// If the agent is close to the current node, set current to the next node
 	if (Vector2Distance(agent->getPos(), target) < 17.0f)
 	{
-		//bad code that works. same as in FindPlayerState
-
+		// Find the index of the current node
 		size_t i = 0;
-
-		// find the index of the current node
 		for (auto itter : FSS::pathInfo[agent].path)
 		{
 			if (itter == FSS::pathInfo[agent].currentNode)
@@ -92,8 +89,11 @@ Vector2 FindSpawnerState::update(Agent* agent, float deltaTime)
 			i++;
 		}
 
-		//if index is out of range, use the first node, otherwise use the index
-		FSS::pathInfo[agent].currentNode = (i + 1 > FSS::pathInfo[agent].path.size()) ? FSS::pathInfo[agent].path[0] : FSS::pathInfo[agent].path[i + 1];
+		// If the index is out of range, use the first node, otherwise use the index
+		if (i + 1 > FSS::pathInfo[agent].path.size())
+			FSS::pathInfo[agent].currentNode = FSS::pathInfo[agent].path[0];
+		else
+			FSS::pathInfo[agent].currentNode = FSS::pathInfo[agent].path[i + 1];
 	}
 
 

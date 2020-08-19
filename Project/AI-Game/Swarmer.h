@@ -38,6 +38,7 @@ protected:
 
 	// When the swarmers health reaches 0, its destroyed
 	int health;
+	const int maxHealth;
 
 private:
 	// The flocking state is passed by the spawner

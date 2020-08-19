@@ -84,16 +84,16 @@ void GameApp::startup(Vector2 screenSize)
 	// Flocking behaviour and spawner
 	std::shared_ptr<Behaviour> flock = std::make_shared<FlockingStateBehav>(35.0f, 13.0f, //flock radius
 																			90.0f, 15.0f, 10.0f, //wander vals
-																			1.5f, 2.5f, 2.0f, 1.2f); //weights
+																			2.0f, 2.5f, 2.0f, 1.2f); //weights
 	new Spawner({ 150, 250 }, flock, 20, 0.2f);
 
 
 	// Create state machine with states
 	std::shared_ptr<StateMachine> stateMachine = std::make_shared<StateMachine>();
 	std::shared_ptr<State> recruitState = std::make_shared<RecruitmentState>();
-	std::shared_ptr<State> findPlayer = std::make_shared<FindPlayerState>(40.0f, 100.0f);
+	std::shared_ptr<State> findPlayer = std::make_shared<FindPlayerState>(32.0f, 100.0f);
 	std::shared_ptr<State> attackState = std::make_shared<AttackState>(50.0f);
-	std::shared_ptr<State> findSpawner = std::make_shared<FindSpawnerState>(40.0f);
+	std::shared_ptr<State> findSpawner = std::make_shared<FindSpawnerState>(32.0f);
 	// Add states to the state machine
 	stateMachine->addState(recruitState);
 	stateMachine->addState(findPlayer);

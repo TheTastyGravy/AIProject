@@ -9,6 +9,7 @@ Swarmer::Swarmer(Vector2 position, std::shared_ptr<Behaviour> flockingState, int
 	importance(0.0f),
 	leader(nullptr),
 	health(health),
+	maxHealth(health),
 	flocking(flockingState)
 {
 	addTag(Tag::Swarmer);
@@ -21,8 +22,8 @@ Swarmer::~Swarmer()
 
 void Swarmer::draw()
 {
-	// Draw swarmers as black dots
-	DrawCircleV(position, 2, BLACK);
+	// Draw swarmers as black dots that hollow on taking damage
+	DrawRing(position, 2.0f*(1.0f - (float)health/maxHealth), 2.5f, 0.0f, 360.0f, 0, BLACK);
 }
 
 
