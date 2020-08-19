@@ -124,11 +124,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)\bin\$(Configuration)\raylib\</OutDir>
+    <OutDir>$(SolutionDir)\$(Configuration)\raylib\</OutDir>
     <IntDir>$(SolutionDir)\raylib\bin\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)\bin\$(Configuration)\raylib\</OutDir>
+    <OutDir>$(SolutionDir)\$(Configuration)\raylib\</OutDir>
     <IntDir>$(SolutionDir)\raylib\bin\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release.DLL|Win32'">
