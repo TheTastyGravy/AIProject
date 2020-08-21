@@ -14,7 +14,7 @@ Graph2D::~Graph2D()
 }
 
 
-void Graph2D::draw(float nodeSize) const
+void Graph2D::draw(const float& nodeSize) const
 {
 	for (auto& node : nodes)
 	{

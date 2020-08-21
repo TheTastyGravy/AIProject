@@ -12,7 +12,7 @@ public:
 	virtual ~Graph2D();
 
 
-	virtual void draw(float nodeSize) const;
+	virtual void draw(const float& nodeSize) const;
 
 	// Set 'outPath' to the full path from 'start' to 'end'. Retuns false if no path was found
 	bool findPath(Node* start, Node* end, std::vector<Node*>& outPath) const;
