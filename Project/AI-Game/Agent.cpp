@@ -3,7 +3,7 @@
 #include "raylib.h"
 
 
-Agent::Agent(Vector2 position, float maxSpeed, float friction) :
+Agent::Agent(const Vector2& position, const float maxSpeed, const float friction) :
 	GameObject(position),
 	behaviours(),
 	velocity({ 0, 0 }),
@@ -17,7 +17,7 @@ Agent::~Agent()
 }
 
 
-void Agent::addBehaviour(std::shared_ptr<Behaviour> behaviour)
+void Agent::addBehaviour(const std::shared_ptr<Behaviour> behaviour)
 {
 	behaviours.push_back(behaviour);
 	// Execute any setup behaviour
@@ -25,7 +25,7 @@ void Agent::addBehaviour(std::shared_ptr<Behaviour> behaviour)
 }
 
 
-void Agent::update(float deltaTime)
+void Agent::update(const float& deltaTime)
 {
 	// Holds the total force from behaviours
 	Vector2 force{ 0, 0 };

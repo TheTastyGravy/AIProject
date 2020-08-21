@@ -21,7 +21,7 @@ Leader::~Leader()
 }
 
 
-void Leader::update(float deltaTime)
+void Leader::update(const float& deltaTime)
 {
 	//Run regular behaviours
 	Agent::update(deltaTime);

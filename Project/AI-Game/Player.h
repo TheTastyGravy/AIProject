@@ -6,14 +6,14 @@ class Player :
     public Agent
 {
 public:
-    Player(Vector2 position, float size, float attackRadius);
+    Player(const Vector2& position, const float& size, const float& attackRadius);
     virtual ~Player();
 
 
-    virtual void update(float deltaTime);
+    virtual void update(const float& deltaTime);
     virtual void draw();
 
 protected:
-    float radius;
-    float size;
+    const float radius;
+    const float size;
 };

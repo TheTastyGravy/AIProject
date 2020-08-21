@@ -12,7 +12,7 @@ public:
 	virtual ~Leader();
 
 
-	virtual void update(float deltaTime);
+	virtual void update(const float& deltaTime);
 	virtual void draw();
 
 	void joinSwarm(Swarmer* swarmer);

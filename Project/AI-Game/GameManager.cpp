@@ -10,7 +10,7 @@ std::vector<GameObject*> GameManager::leaders;
 Graph2D GameManager::graph;
 
 
-std::vector<GameObject*> GameManager::searchForTag(Tag tag)
+std::vector<GameObject*> GameManager::searchForTag(const Tag tag)
 {
 	// Return the leader vector if applicable
 	if (tag == Tag::Leader)
@@ -37,7 +37,7 @@ std::vector<GameObject*> GameManager::searchForTag(Tag tag)
 	return result;
 }
 
-std::vector<GameObject*> GameManager::searchInRadius(Tag tag, float radius, Vector2 position)
+std::vector<GameObject*> GameManager::searchInRadius(const Tag tag, const float& radius, const Vector2& position)
 {
 	std::vector<GameObject*> result;
 
@@ -67,7 +67,7 @@ std::vector<GameObject*> GameManager::searchInRadius(Tag tag, float radius, Vect
 }
 
 
-void GameManager::addToPool(GameObject* obj)
+void GameManager::addToPool(GameObject* const obj)
 {
 	// Check that obj isnt already in the pool
 	for (auto var : pool)
@@ -79,7 +79,7 @@ void GameManager::addToPool(GameObject* obj)
 	pool.push_back(obj);
 }
 
-void GameManager::removeFromPool(GameObject* obj)
+void GameManager::removeFromPool(const GameObject* const obj)
 {
 	bool isLeader = false;
 
@@ -117,7 +117,7 @@ void GameManager::removeFromPool(GameObject* obj)
 }
 
 
-void GameManager::updateLeader(GameObject* obj, bool adding)
+void GameManager::updateLeader(GameObject* const obj, const bool adding)
 {
 	// If it needs to be added, add it and exit
 	if (adding)
@@ -138,7 +138,7 @@ void GameManager::updateLeader(GameObject* obj, bool adding)
 }
 
 
-std::vector<Graph2D::Node*> GameManager::findPath(Vector2 start, Vector2 end)
+std::vector<Graph2D::Node*> GameManager::findPath(const Vector2& start, const Vector2& end)
 {
 	// Find the target nodes
 	Graph2D::Node* startNode = graph.findClosestNode(start);
@@ -152,7 +152,7 @@ std::vector<Graph2D::Node*> GameManager::findPath(Vector2 start, Vector2 end)
 	return nodes;
 }
 
-bool GameManager::loadMap(std::string fileName, const int screenHight, const int screenWidth, const int mapHight, const int mapWidth)
+bool GameManager::loadMap(const std::string& fileName, const int screenHight, const int screenWidth, const int mapHight, const int mapWidth)
 {
 	// How large each cell on the map is
 	const Vector2 CELL_SIZE = { (float)screenWidth / mapWidth, (float)screenHight / mapHight };

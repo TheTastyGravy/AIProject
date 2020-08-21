@@ -2,7 +2,7 @@
 #include "raylib.h"
 
 
-Wall::Wall(Vector2 position, Vector2 size, Color color) :
+Wall::Wall(const Vector2& position, const Vector2& size, const Color& color) :
 	GameObject(position),
 	size(size),
 	color(color)
@@ -15,7 +15,7 @@ Wall::~Wall()
 }
 
 
-void Wall::update(float deltaTime)
+void Wall::update(const float& deltaTime)
 {
 }
 
@@ -24,5 +24,3 @@ void Wall::draw()
 	// Walls are black squares
 	DrawRectangleV(position, size, BLACK);
 }
-
-

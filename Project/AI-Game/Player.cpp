@@ -4,7 +4,7 @@
 #include "raylib.h"
 
 
-Player::Player(Vector2 position, float size, float attackRadius) :
+Player::Player(const Vector2& position, const float& size, const float& attackRadius) :
 	Agent(position),
 	radius(attackRadius),
 	size(size)
@@ -17,7 +17,7 @@ Player::~Player()
 }
 
 
-void Player::update(float deltaTime)
+void Player::update(const float& deltaTime)
 {
 	// Attack swarmers if the player is holding m1
 	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))

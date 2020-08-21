@@ -2,7 +2,7 @@
 #include "GameManager.h"
 
 
-GameObject::GameObject(Vector2 position) :
+GameObject::GameObject(const Vector2& position) :
 	position(position)
 {
 	// Add this object to the pool
@@ -16,7 +16,7 @@ GameObject::~GameObject()
 }
 
 
-void GameObject::addTag(Tag tag)
+void GameObject::addTag(const Tag tag)
 {
 	// Look at this object's tags
 	for (auto& var : tags)
@@ -34,7 +34,7 @@ void GameObject::addTag(Tag tag)
 		GameManager::updateLeader(this, true);
 }
 
-void GameObject::removeTag(Tag tag)
+void GameObject::removeTag(const Tag tag)
 {
 	// Find the tag and remove it
 	for (int i = 0; i < tags.size(); i++)

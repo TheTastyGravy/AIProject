@@ -4,7 +4,7 @@
 #include "FormationStateBehav.h"
 
 
-Swarmer::Swarmer(Vector2 position, std::shared_ptr<Behaviour> flockingState, int health) :
+Swarmer::Swarmer(const Vector2& position, const std::shared_ptr<Behaviour> flockingState, const int health) :
 	Agent(position, 200.0f),
 	importance(0.0f),
 	leader(nullptr),
@@ -23,11 +23,11 @@ Swarmer::~Swarmer()
 void Swarmer::draw()
 {
 	// Draw swarmers as black dots that hollow on taking damage
-	DrawRing(position, 2.0f*(1.0f - (float)health/maxHealth), 2.5f, 0.0f, 360.0f, 0, BLACK);
+	DrawRing(position, 2.0f*(1.0f - (float)health/maxHealth), 2.5f, 0, 360, 0, BLACK);
 }
 
 
-void Swarmer::enterFlocking(float importance, Leader* leader)
+void Swarmer::enterFlocking(const float& importance, Leader* leader)
 {
 	// Update importance and leader, and join its swarm
 	this->importance = importance;
@@ -38,7 +38,7 @@ void Swarmer::enterFlocking(float importance, Leader* leader)
 	addBehaviour(flocking);
 }
 
-void Swarmer::enterFormation(float importance, Agent* leaderObj, Vector2 offset)
+void Swarmer::enterFormation(const float& importance, Agent* leaderObj, const Vector2& offset)
 {
 	// A swarmer cant enter formation unless it has a ref to a leader
 	if (leader == nullptr)
@@ -54,7 +54,7 @@ void Swarmer::enterFormation(float importance, Agent* leaderObj, Vector2 offset)
 }
 
 
-void Swarmer::dealDamage(int damage)
+void Swarmer::dealDamage(const int damage)
 {
 	health -= damage;
 

@@ -20,10 +20,10 @@ class GameObject
 	// The class needs to access tags, but they should not be public
 	friend class GameManager;
 public:
-	GameObject(Vector2 position);
+	GameObject(const Vector2& position);
 	virtual ~GameObject();
 
-	virtual void update(float deltaTime) = 0;
+	virtual void update(const float& deltaTime) = 0;
 	virtual void draw() = 0;
 
 	// Set the current position of the agent
@@ -32,9 +32,9 @@ public:
 	Vector2 getPos() const { return position; }
 
 	// Add 'tag' to the object, if it doesnt already have it
-	void addTag(Tag tag);
+	void addTag(const Tag tag);
 	// Remove 'tag' from the object, if it has it
-	void removeTag(Tag tag);
+	void removeTag(const Tag tag);
 
 protected:
 	Vector2 position;

@@ -3,10 +3,10 @@
 #include "raylib.h"
 #include "WanderStateBehav.h"
 
-Vector2 randPos(int posRange, Vector2 indent);
+Vector2 randPos(const int posRange, const Vector2& indent);
 
 
-Spawner::Spawner(Vector2 position, std::shared_ptr<Behaviour> flockingState, int swarmerHealth, float timeDelay, float radius) :
+Spawner::Spawner(const Vector2& position, const std::shared_ptr<Behaviour> flockingState, const int swarmerHealth, const float& timeDelay, const float& radius) :
 	GameObject(position),
 	timePassed(0.0f),
 	timeDelay(timeDelay),
@@ -26,7 +26,7 @@ Spawner::~Spawner()
 }
 
 
-void Spawner::update(float deltaTime)
+void Spawner::update(const float& deltaTime)
 {
 	timePassed += deltaTime;
 
@@ -52,7 +52,7 @@ void Spawner::draw()
 }
 
 
-Vector2 randPos(int posRange, Vector2 indent)
+Vector2 randPos(const int posRange, const Vector2& indent)
 {
 	return { (float)(rand() % posRange + indent.x), (float)(rand() % posRange + indent.y) };
 }

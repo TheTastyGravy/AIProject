@@ -10,7 +10,7 @@ class Swarmer :
 	public Agent
 {
 public:
-	Swarmer(Vector2 position, std::shared_ptr<Behaviour> flockingState, int health = 5);
+	Swarmer(const Vector2& position, const std::shared_ptr<Behaviour> flockingState, const int health = 5);
 	virtual ~Swarmer();
 
 
@@ -18,16 +18,16 @@ public:
 	virtual void draw();
 
 	// Enter the flocking state
-	void enterFlocking(float importance, Leader* leader);
+	void enterFlocking(const float& importance, Leader* leader);
 	// Enter the formation state
-	void enterFormation(float importance, Agent* leaderObj, Vector2 offset);
+	void enterFormation(const float& importance, Agent* leaderObj, const Vector2& offset);
 
 	// Returns this boid's importance value
 	virtual float getImportance() const { return importance; }
 	// Return a pointer to this swarmers leader. nullptr if it doesnt have one
 	virtual Leader* getLeader() const { return leader; }
 	// Reduces health by 'damage', and if it reaches 0, destroys the swarmer
-	virtual void dealDamage(int damage);
+	virtual void dealDamage(const int damage);
 
 protected:
 	// Used by other boids to determine how much this object should impact it's steering forces
@@ -42,5 +42,5 @@ protected:
 
 private:
 	// The flocking state is passed by the spawner
-	std::shared_ptr<Behaviour> flocking;
+	const std::shared_ptr<Behaviour> flocking;
 };
