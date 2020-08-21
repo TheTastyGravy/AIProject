@@ -8,17 +8,17 @@ class FindPlayerState :
 	public State
 {
 public:
-	FindPlayerState(float Arriveradius, float formationRadius);
+	FindPlayerState(const float& Arriveradius, const float& formationRadius);
 	virtual ~FindPlayerState();
 
 
 	virtual void setup(Agent* agent);
-	virtual Vector2 update(Agent* agent, float deltaTime);
+	virtual Vector2 update(Agent* agent, const float& deltaTime);
 	virtual void shutdown(Agent* agent);
 
 protected:
 	GameObject* player;
 
-	float arriveRadius;
-	float formationRadius;
+	const float arriveRadius;
+	const float formationRadius;
 };

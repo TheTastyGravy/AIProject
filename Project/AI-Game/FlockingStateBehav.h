@@ -6,27 +6,27 @@ class FlockingStateBehav :
 	public Behaviour
 {
 public:
-	FlockingStateBehav(float radius, float seperationRadius, float wanderRadius, float wanderJitter, float wanderDist, 
-					   float seperationMulti = 1.0f, float allignmentMulti = 1.0f, float cohesionMulti = 1.0f, float wanderMulti = 1.0f);
+	FlockingStateBehav(const float& radius, const float& seperationRadius, const float& wanderRadius, const float& wanderJitter, const float& wanderDist, 
+					   const float& seperationMulti = 1.0f, const float& allignmentMulti = 1.0f, const float& cohesionMulti = 1.0f, const float& wanderMulti = 1.0f);
 	virtual ~FlockingStateBehav();
 
 
 	virtual void setup(Agent* agent);
-	virtual Vector2 update(Agent* agent, float deltaTime);
+	virtual Vector2 update(Agent* agent, const float& deltaTime);
 
 protected:
 	// Flocking variables
-	float radius;
-	float sepRadius;
+	const float radius;
+	const float sepRadius;
 
-	float sepMulti;
-	float allignMulti;
-	float coheMulti;
+	const float sepMulti;
+	const float allignMulti;
+	const float coheMulti;
 
 
 	// Wander variables
-	float wandRadius;
-	float wandJit;
-	float wandDist;
-	float wandMulti;
+	const float wandRadius;
+	const float wandJit;
+	const float wandDist;
+	const float wandMulti;
 };

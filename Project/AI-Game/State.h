@@ -17,13 +17,13 @@ public:
 
 
 	virtual void setup(Agent* agent) {};
-	virtual Vector2 update(Agent* agent, float deltaTime) = 0;
+	virtual Vector2 update(Agent* agent, const float& deltaTime) = 0;
 	virtual void shutdown(Agent* agent) {};
 
-	void addTransition(std::shared_ptr<Transition> transition) { transitions.push_back(transition); }
+	void addTransition(const std::shared_ptr<Transition> transition) { transitions.push_back(transition); }
 
 	// Returns the first transition to trigger, or nullptr if none triggered
-	Transition* getTriggeredTransition(Agent* agent)
+	Transition* getTriggeredTransition(const Agent* agent)
 	{
 		for (auto trans : transitions)
 		{

@@ -17,7 +17,7 @@ void RecruitmentState::setup(Agent* agent)
     ((Leader*)agent)->setRecruiting(true);
 }
 
-Vector2 RecruitmentState::update(Agent* agent, float deltaTime)
+Vector2 RecruitmentState::update(Agent* agent, const float& deltaTime)
 {
     // Stop the agent from moving while recruiting so they stay in range
     Vector2 force = agent->getVel();

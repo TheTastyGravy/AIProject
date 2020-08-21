@@ -2,7 +2,7 @@
 #include "Agent.h"
 
 
-FormationStateBehav::FormationStateBehav(Agent* leader, Vector2 offset) :
+FormationStateBehav::FormationStateBehav(Agent* leader, const Vector2& offset) :
 	leader(leader),
 	offset(offset)
 {
@@ -13,7 +13,7 @@ FormationStateBehav::~FormationStateBehav()
 }
 
 
-Vector2 FormationStateBehav::update(Agent* agent, float deltaTime)
+Vector2 FormationStateBehav::update(Agent* agent, const float& deltaTime)
 {
 	// Find the angle the leader is facing
 	float angle = (float)atan2(leader->getVel().y, leader->getVel().x) * (180 / PI);

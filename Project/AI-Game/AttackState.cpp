@@ -3,7 +3,7 @@
 #include "Leader.h"
 
 
-AttackState::AttackState(float rangeFromPlayer) :
+AttackState::AttackState(const float& rangeFromPlayer) :
     range(rangeFromPlayer),
     player()
 {
@@ -31,7 +31,7 @@ void AttackState::setup(Agent* agent)
     }
 }
 
-Vector2 AttackState::update(Agent* agent, float deltaTime)
+Vector2 AttackState::update(Agent* agent, const float& deltaTime)
 {
     // Update just keeps the leader at a distance from the player
 

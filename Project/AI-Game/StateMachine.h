@@ -17,7 +17,7 @@ public:
 	virtual ~StateMachine() {}
 
 
-	virtual Vector2 update(Agent* agent, float deltaTime);
+	virtual Vector2 update(Agent* agent, const float& deltaTime);
 
 	void addState(std::shared_ptr<State> state) { states.push_back(state); }
 	void setCurrentState(State* state) { currentState = state; }

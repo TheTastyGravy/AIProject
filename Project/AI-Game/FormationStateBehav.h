@@ -6,11 +6,11 @@ class FormationStateBehav :
 	public Behaviour
 {
 public:
-	FormationStateBehav(Agent* leader, Vector2 offset);
+	FormationStateBehav(Agent* leader, const Vector2& offset);
 	virtual ~FormationStateBehav();
 
 
-	virtual Vector2 update(Agent* agent, float deltaTime);
+	virtual Vector2 update(Agent* agent, const float& deltaTime);
 
 protected:
 	Agent* leader;

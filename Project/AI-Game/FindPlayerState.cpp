@@ -21,7 +21,7 @@ namespace FPS
 }
 
 
-FindPlayerState::FindPlayerState(float arriveRadius, float formationRadius) :
+FindPlayerState::FindPlayerState(const float& arriveRadius, const float& formationRadius) :
 	player(),
 	arriveRadius(arriveRadius),
 	formationRadius(formationRadius)
@@ -44,7 +44,7 @@ void FindPlayerState::setup(Agent* agent)
 	FPS::pathInfo[agent].currentNode = FPS::pathInfo[agent].path.front();
 }
 
-Vector2 FindPlayerState::update(Agent* agent, float deltaTime)
+Vector2 FindPlayerState::update(Agent* agent, const float& deltaTime)
 {
 	// If the agent is within range of the player and they have no formation members, enter formation
 	if (Vector2Distance(agent->getPos(), player->getPos()) < formationRadius && ((Leader*)agent)->getFormation().empty())

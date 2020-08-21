@@ -8,7 +8,7 @@ class Agent;
 class Transition
 {
 public:
-	Transition(State* state, std::function<bool(const Agent*)> condition ) :
+	Transition(State* const state, const std::function<bool(const Agent*)> condition ) :
 		state(state),
 		condition(condition)
 	{}
@@ -22,6 +22,6 @@ public:
 	virtual bool hasTriggered(const Agent* agent) { return condition(agent); }
 
 private:
-	State* state;
-	std::function<bool(const Agent*)> condition;
+	State* const state;
+	const std::function<bool(const Agent*)> condition;
 };

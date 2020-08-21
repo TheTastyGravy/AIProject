@@ -16,10 +16,10 @@ struct UniqueTarget
 std::map<Agent*, UniqueTarget> agentTargetInfo;
 
 
-FlockingStateBehav::FlockingStateBehav(float radius, float seperationRadius, float wanderRadius, float wanderJitter, float wanderDist, 
-									   float seperationMulti, float allignmentMulti, float cohesionMulti, float wanderMulti) :
+FlockingStateBehav::FlockingStateBehav(const float& radius, const float& seperationRadius, const float& wanderRadius, const float& wanderJitter, const float& wanderDist, 
+									   const float& seperationMulti, const float& allignmentMulti, const float& cohesionMulti, const float& wanderMulti) :
 	radius(radius),
-	sepRadius(seperationRadius),
+	sepRadius((seperationRadius > radius) ? radius : seperationRadius),	// sepRadius cant be larger than radius
 	sepMulti(seperationMulti),
 	allignMulti(allignmentMulti),
 	coheMulti(cohesionMulti),
@@ -28,9 +28,6 @@ FlockingStateBehav::FlockingStateBehav(float radius, float seperationRadius, flo
 	wandDist(wanderDist),
 	wandMulti(wanderMulti)
 {
-	// sepRadius cant be larger than radius
-	if (seperationRadius > radius)
-		sepRadius = radius;
 }
 
 FlockingStateBehav::~FlockingStateBehav()
@@ -82,11 +79,11 @@ void FlockingStateBehav::setup(Agent* agent)
 }
 
 
-Vector2 seperation(std::vector<Swarmer*> swarm, const Agent* agent, float radius, float multi = 1.0f);
-Vector2 allignment(const std::vector<Swarmer*>& swarm, const Agent* agent, float multi = 1.0f);
-Vector2 cohesion(const std::vector<Swarmer*>& swarm, const Agent* agent, float multi = 1.0f);
+Vector2 seperation(std::vector<Swarmer*> swarm, const Agent* agent, const float& radius, const float& multi = 1.0f);
+Vector2 allignment(const std::vector<Swarmer*>& swarm, const Agent* agent, const float& multi = 1.0f);
+Vector2 cohesion(const std::vector<Swarmer*>& swarm, const Agent* agent, const float& multi = 1.0f);
 
-Vector2 FlockingStateBehav::update(Agent* agent, float deltaTime)
+Vector2 FlockingStateBehav::update(Agent* agent, const float& deltaTime)
 {
 	// Cast the agent to a swarmer
 	Swarmer* swarmer = (Swarmer*)agent;
@@ -205,7 +202,7 @@ Vector2 FlockingStateBehav::update(Agent* agent, float deltaTime)
 
 
 
-Vector2 seperation(std::vector<Swarmer*> swarm, const Agent* agent, float radius, float multi)
+Vector2 seperation(std::vector<Swarmer*> swarm, const Agent* agent, const float& radius, const float& multi)
 {
 	Vector2 force = { 0, 0 };
 
@@ -254,7 +251,7 @@ Vector2 seperation(std::vector<Swarmer*> swarm, const Agent* agent, float radius
 	}
 }
 
-Vector2 allignment(const std::vector<Swarmer*>& swarm, const Agent* agent, float multi)
+Vector2 allignment(const std::vector<Swarmer*>& swarm, const Agent* agent, const float& multi)
 {
 	// Use the leader
 	Leader* leader = ((Swarmer*)agent)->getLeader();
@@ -279,7 +276,7 @@ Vector2 allignment(const std::vector<Swarmer*>& swarm, const Agent* agent, float
 	return Vector2Scale(Vector2Subtract(force, agent->getVel()), multi);
 }
 
-Vector2 cohesion(const std::vector<Swarmer*>& swarm, const Agent* agent, float multi)
+Vector2 cohesion(const std::vector<Swarmer*>& swarm, const Agent* agent, const float& multi)
 {
 	// Use the leader
 	Leader* leader = ((Swarmer*)agent)->getLeader();

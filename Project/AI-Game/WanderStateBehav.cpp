@@ -10,7 +10,7 @@
 std::map<Agent*, Vector2> agentTargetInfo;
 
 
-WanderStateBehav::WanderStateBehav(Vector2 wanderCenter, int wanderRadius, float transitionDistance, float multi) :
+WanderStateBehav::WanderStateBehav(const Vector2& wanderCenter, const int wanderRadius, const float& transitionDistance, const float& multi) :
 	wandCenter(wanderCenter),
 	radius(wanderRadius),
 	maxDist(transitionDistance),
@@ -29,7 +29,7 @@ void WanderStateBehav::setup(Agent* agent)
 	agentTargetInfo[agent] = { (float)(rand() % radius + wandCenter.x - radius*0.5f), (float)(rand() % radius + wandCenter.y - radius*0.5f) };
 }
 
-Vector2 WanderStateBehav::update(Agent* agent, float deltaTime)
+Vector2 WanderStateBehav::update(Agent* agent, const float& deltaTime)
 {
 	// ---------- TRANSITION ----------
 

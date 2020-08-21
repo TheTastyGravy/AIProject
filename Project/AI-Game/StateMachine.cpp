@@ -3,7 +3,7 @@
 #include "Transition.h"
 
 
-Vector2 StateMachine::update(Agent* agent, float deltaTime)
+Vector2 StateMachine::update(Agent* agent, const float& deltaTime)
 {
 	// If not set to any state, the machine does nothing
 	if (currentState == nullptr)

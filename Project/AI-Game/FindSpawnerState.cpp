@@ -19,8 +19,7 @@ namespace FSS
 }
 
 
-
-FindSpawnerState::FindSpawnerState(float arrivalRadius) :
+FindSpawnerState::FindSpawnerState(const float& arrivalRadius) :
     arriveRadius(arrivalRadius)
 {
 }
@@ -64,7 +63,7 @@ void FindSpawnerState::setup(Agent* agent)
     }
 }
 
-Vector2 FindSpawnerState::update(Agent* agent, float deltaTime)
+Vector2 FindSpawnerState::update(Agent* agent, const float& deltaTime)
 {
 	// Spawners dont move, so the path never needs to be updated
 
